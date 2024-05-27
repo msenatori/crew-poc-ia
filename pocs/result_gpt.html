@@ -1,0 +1,213 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <!-- styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- header -->
+  <header>
+    <h1 id="logo">To-Do List</h1>
+  </header>
+  <!-- main content area -->
+  <main>
+    <!-- task list -->
+    <section id="task-list">
+      <ul id="tasks"></ul>
+      <!-- navigation menu -->
+      <nav id="navigation">
+        <button id="today-tasks">Today's Tasks</button>
+        <button id="upcoming-tasks">Upcoming Tasks</button>
+        <button id="all-tasks">All Tasks</button>
+      </nav>
+    </section>
+    <!-- search functionality -->
+    <div id="search">
+      <input type="search" placeholder="Search tasks...">
+      <button id="search-button">Search</button>
+    </div>
+  </main>
+  
+  <!-- scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
+<style>
+:root {
+  --primary-color: #3498DB;
+  --secondary-color: #E5E5E5;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: Open Sans, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+}
+
+body {
+  background-color: var(--primary-color);
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+#logo {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+#task-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+#tasks {
+  list-style: none;
+  padding: 20px 40px;
+  margin-bottom: 20px;
+}
+
+#tasks li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+}
+
+#tasks li:last-child {
+  border-bottom: none;
+}
+
+#tasks li.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+#navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+#today-tasks, #upcoming-tasks, #all-tasks {
+  font-size: 16px;
+  background-color: var(--primary-color);
+  border: none;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#search {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+#search input[type="search"] {
+  font-size: 14px;
+  width: 200px;
+  height: 30px;
+  border-radius: 5px;
+  border-color: #ccc;
+  padding: 8px;
+}
+
+#search button[type="submit"] {
+  font-size: 16px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const tasksContainer = document.getElementById('tasks');
+  const taskList = [];
+
+  // initialize task list data
+  // ...
+
+  // render task list
+  taskList.forEach((task) => {
+    const taskItem = document.createElement('li');
+    taskItem.textContent = task.name;
+    if (task.completed) {
+      taskItem.className += ' completed';
+    }
+    tasksContainer.appendChild(taskItem);
+  });
+
+  // handle task completion and deletion
+  tasksContainer.addEventListener('click', function (event) {
+    if (event.target.tagName === 'LI') {
+      const taskItem = event.target;
+      if (taskItem.classList.contains('completed')) {
+        // mark as uncompleted
+        taskItem.classList.remove('completed');
+      } else {
+        // mark as completed
+        taskItem.classList.add('completed');
+      }
+    } else if (event.target.tagName === 'BUTTON') {
+      const buttonId = event.target.id;
+      // handle navigation and search functionality
+      switch (buttonId) {
+        case 'today-tasks':
+          // show today's tasks
+          break;
+        case 'upcoming-tasks':
+          // show upcoming tasks
+          break;
+        case 'all-tasks':
+          // show all tasks
+          break;
+        case 'search-button':
+          const searchInput = document.getElementById('search-input');
+          const searchTerm = searchInput.value.trim();
+          if (searchTerm) {
+            // filter tasks by search term
+            taskList = taskList.filter((task) => task.name.includes(searchTerm));
+            renderTaskList(taskList);
+          } else {
+            // reset task list
+            taskList.forEach((task) => {
+              const taskItem = document.createElement('li');
+              taskItem.textContent = task.name;
+              if (task.completed) {
+                taskItem.className += ' completed';
+              }
+              tasksContainer.appendChild(taskItem);
+            });
+          }
+      }
+    }
+  });
+
+});
+</script>
