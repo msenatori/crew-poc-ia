@@ -33,3 +33,33 @@ Sigue estos pasos para configurar el entorno virtual:
     ```bash
     deactivate
     ```
+5. **Configurar llama3**
+
+   Crear un archivo llamado ModelFile en el raiz (no lo subi)
+   
+   ```
+   FROM llama3
+   
+   # Set parameters
+   
+   PARAMETER temperature 0.8
+   PARAMETER stop Result
+   
+   # Sets a custom system message to specify the behavior of the chat assistant
+   
+   # Leaving it blank for now.
+   
+   SYSTEM """"""
+   ```
+
+   Crear el modelo
+
+   ```bash
+   ollama create crewai-llama3 -f .\Modelfile
+   ```
+
+   Validarlo.
+
+   ```bash
+   ollama list
+   ```
