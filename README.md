@@ -1,4 +1,6 @@
-# Proyecto Básico de Python
+# Proyecto Básico de Python Usando CREW AI
+
+Basado en: https://medium.com/the-ai-forum/create-a-blog-writer-multi-agent-system-using-crewai-and-ollama-f47654a5e1cd
 
 Este es un proyecto básico en Python 3.12 que demuestra cómo configurar un entorno virtual y gestionar dependencias utilizando `requirements.txt`.
 
